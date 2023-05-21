@@ -15,8 +15,9 @@
             class="collapse navbar-collapse justify-content-start m-auto">
             <ul class="navbar-nav">
                 <li
-                    class="nav-item"
-                    routerLinkActive="active">
+                    class="nav-item active"
+                        routerLink="converter"
+                        routerLinkActive="active" >
                     <a
                         class="nav-link cursor-pointer mt-0 mt-md-2 mt-lg-2 mt-xl-2"
                         routerLink="converter"
@@ -33,6 +34,28 @@
                         routerLink="history"
                         aria-label="View Conversion History">
                         {{ 'main.nav.view-exchange-history' | translate }}
+                    </a>
+                </li>
+
+                <li
+                    class="nav-item"
+                    routerLinkActive="active">
+                    <a
+                        class="nav-link cursor-pointer mt-0 mt-md-2 mt-lg-2 mt-xl-2"
+                        routerLink="details/EUR/USD"
+                        aria-label="EUR-USD Details">
+                        {{ 'EUR-USD Details' | translate }}
+                    </a>
+                </li>
+
+                <li
+                    class="nav-item"
+                    routerLinkActive="active">
+                    <a
+                        class="nav-link cursor-pointer mt-0 mt-md-2 mt-lg-2 mt-xl-2"
+                        routerLink="details/EUR/GBP"
+                        aria-label="EUR-GBP Details">
+                        {{ 'EUR-GBP Details' | translate }}
                     </a>
                 </li>
             </ul>

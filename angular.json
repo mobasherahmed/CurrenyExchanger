@@ -28,9 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
-
+              "src/assets/css/currency-exchanger-app-theme.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/assets/css/fontello.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           },
