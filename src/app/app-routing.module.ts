@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConverterComponent } from './components/converter/converter.component';
+import { CurrencyDeatilsComponent } from './components/currency-deatils/currency-deatils.component';
 
 export const routes: Routes = [
   {
@@ -9,6 +10,7 @@ export const routes: Routes = [
       pathMatch: 'full',
   },
   { path: 'converter', component: ConverterComponent},
+  { path: 'details', component: CurrencyDeatilsComponent},
   { path: '**', redirectTo: 'converter' },
 ];
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageButtonsComponent } from './language-buttons/language-buttons.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { LanguageButtonsComponent } from './language-buttons/language-buttons.co
   ],
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    AppRoutingModule
   ],
   exports:[HeaderComponent,LanguageButtonsComponent]
 })

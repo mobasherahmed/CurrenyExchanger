@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { getCurrencySymbol } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { Observable } from 'rxjs';
@@ -6,10 +7,7 @@ import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, startWith, take } from 'rxjs/operators';
 import { ExchangeRatesApiRequestService } from '../../shared/service/exchange-rates-api-request.service';
 import { CurrencyExchangeService } from '../../shared/service/currency-exchange.service';
-import {ExchangeRatesResponse,MappedCurrencyRateObject} from '../../shared/interface/exchange-rates.model';
-
-// import getSymbolFromCurrency from 'currency-symbol-map';
-import { TranslateService } from '@ngx-translate/core';
+import {ExchangeRatesResponse,MappedCurrencyRateObject, preSelectedData} from '../../shared/interface/exchange-rates.model';
 import { Currency, FormNames } from 'src/app/shared/interface/enum.model';
 
 @Component({
@@ -20,6 +18,7 @@ import { Currency, FormNames } from 'src/app/shared/interface/enum.model';
 })
 export class ConverterComponent implements OnInit {
 
+    @Input() details :boolean = false;
     converterForm!: FormGroup;
     filteredFromValues!: Observable<string[]>;
     filteredToValues!: Observable<string[]>;
@@ -34,19 +33,18 @@ export class ConverterComponent implements OnInit {
     mappedCurrencies: string[] = [];
 
     private readonly FIRST_ITEM = 0;
-    data!: { fromCurrency: string; toCurrency:string; amount: number; };
+    data!: preSelectedData;
 
     constructor(
         public currencyExchangeService: CurrencyExchangeService,
-        private apiRequestService: ExchangeRatesApiRequestService,
-        private translate: TranslateService,
+        private apiRequestService: ExchangeRatesApiRequestService
     ) {}
 
     ngOnInit() {
         this.converterForm = this.currencyExchangeService.converterForm;
-
+        
         this.disableInputAreas([FormNames.FromControl, FormNames.ToControl]);
-
+        
         this.getRates();
 
         this.filteredFromValues = this.getFromValueChanges(FormNames.FromControl);
@@ -61,14 +59,16 @@ export class ConverterComponent implements OnInit {
                 this.securePositiveInteger('amountControl', amountValue);
             });
 
-        if (this.currencyExchangeService.isServiceReferral) {
-            this.currencyExchangeService.toggleServiceReferral();
+        // if (this.currencyExchangeService.isServiceReferral) {
+        //     this.currencyExchangeService.toggleServiceReferral();
             this.checkValidityOnLoad(this.converterForm.controls['amountControl'].value, 'amountControl');
             this.checkValidityOnLoad(this.converterForm.controls['toControl'].value, 'toControl');
             this.checkValidityOnLoad(this.converterForm.controls['fromControl'].value, 'fromControl');
 
             this.setFormValidity();
-        }
+        // }
+
+        
     }
 
     securePositiveInteger(formControlName: string, amountValue: number) {
@@ -146,6 +146,8 @@ export class ConverterComponent implements OnInit {
         const amount = Math.floor(this.converterForm.get(FormNames.AmountControl)?.value);
         
         this.data = { fromCurrency , toCurrency, amount};
+
+        this.currencyExchangeService.preSelectedData = this.data;
         
         this.result = this.calculateExchangeRate();
 
@@ -225,15 +227,9 @@ export class ConverterComponent implements OnInit {
     }
 
 
-    // calculateExchangeRate(): string {
-    //     return ((this.converterForm.get(FormNames.AmountControl)?.value * this.toRate) / this.fromRate).toFixed(3);
-    // }
-
     incrementNumberForID(): number {
         return (this.id += 1);
     }
-
-
 
     getRates(): void {
         if (!this.currencyExchangeService.exchangeRates) {
@@ -244,15 +240,15 @@ export class ConverterComponent implements OnInit {
                     this.currencyExchangeService.fromCurrencies = this.mapItemCurrencies();
 
                     this.currencyExchangeService.toCurrencies = this.mapItemCurrencies();
-
-                    this.enableInputAreas([FormNames.FromControl, FormNames.ToControl]);
+                   
+                    this.enableInputAreas(this.details ? [FormNames.ToControl] : [FormNames.FromControl, FormNames.ToControl]);
                 },
                 (error): void => {
                   console.log("err",error);
                 },
             );
         } else {
-            this.enableInputAreas([FormNames.FromControl, FormNames.ToControl]);
+            this.enableInputAreas(this.details ? [FormNames.ToControl] : [FormNames.FromControl, FormNames.ToControl]);
         }
     }
 
@@ -268,9 +264,9 @@ export class ConverterComponent implements OnInit {
         }
     }
 
-    // getSymbol(rate: string): string {
-    //     return getSymbolFromCurrency(rate);
-    // }
+    getCurrencySymbol(code: string): string {
+        return getCurrencySymbol(code, "wide");
+    }
 
     private filterInputValue(value: string, arrayGoingFiltered: string[]): string[] {
         const filterValue = value.toLowerCase();

@@ -1,0 +1,15 @@
+<div class="p-2 d-flex justify-content-between align-items-center mb-5">
+    <h2>{{this.currencyExchangeService.preSelectedData.fromCurrency}} - {{getCurrencyFullName}}</h2>
+    <button
+    mat-raised-button
+    class="margin-sm-left"
+    color="primary"
+    type="button"
+    [attr.aria-expanded]="'main.details.back' | translate"
+    routerLink="/converter"
+    >{{ 'main.details.back' | translate }}
+    </button>
+</div>
+
+
+<app-converter [details]="true"></app-converter>

@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/modules/material/material.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ConverterComponent } from './components/converter/converter.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +19,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ConvertResultCardComponent } from './components/convert-result-card/convert-result-card.component';
+import { CurrencyDeatilsComponent } from './components/currency-deatils/currency-deatils.component';
+import { LoaderComponent } from './core/loader.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -29,7 +34,9 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     ConverterComponent,
-    ConvertResultCardComponent
+    ConvertResultCardComponent,
+    CurrencyDeatilsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +44,11 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CoreModule,
+    MatCardModule,
+    MatProgressBarModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatSelectModule,
     MatAutocompleteModule,

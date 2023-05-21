@@ -1,4 +1,4 @@
-<article class="d-flex align-items-start">
+<article class="d-flex align-items-start" *ngIf="!details">
     <h1 class="page-title title--font-size font--roboto-bold" translate="main.title"></h1>
 </article>
 
@@ -40,7 +40,7 @@
                 (onSelectionChange)="selectCurrencyByEnter($event, this.fromCurrency)">
                 <span>{{fromItem}}</span>
 
-                <!-- <b class="primary--color">{{ getSymbol(fromItem) }} </b> -->
+                <b class="primary--color">{{ getCurrencySymbol(fromItem) }} </b>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
@@ -71,7 +71,7 @@
                 (onSelectionChange)="selectCurrencyByEnter($event, this.toCurrency)">
                 <span>{{toItem}}</span>
 
-                <!-- <b class="primary--color">{{ getSymbol(toItem) }} </b> -->
+                <b class="primary--color">{{ getCurrencySymbol(toItem) }} </b>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
@@ -90,13 +90,24 @@
 <article *ngIf="result">
     <app-convert-result-card [data]="data" [currency]="data.toCurrency"></app-convert-result-card>
 
-    <section class="my-2">
-        <div class="row">
-            <div class="col-md-4" *ngFor="let currency of currencyExchangeService.mostPopularCurrencies">
-                <app-convert-result-card [data]="data" [currency]="currency"></app-convert-result-card>
+    <ng-container *ngIf="!details">
+        <button
+        mat-raised-button
+        class="margin-sm-left convert-button w-100 my-1"
+        color="primary"
+        type="button"
+        [attr.aria-expanded]="'main.exchange-field.details' | translate"
+        routerLink="/details"
+        >{{ 'main.exchange-field.details' | translate }}
+        </button>
+        <section class="my-2" >
+            <div class="row">
+                <div class="col-md-4" *ngFor="let currency of currencyExchangeService.mostPopularCurrencies">
+                    <app-convert-result-card [data]="data" [currency]="currency"></app-convert-result-card>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </ng-container>
 </article>
 
 

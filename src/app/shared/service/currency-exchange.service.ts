@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MappedCurrencyRateObject } from '../interface/exchange-rates.model';
+import { MappedCurrencyRateObject, preSelectedData } from '../interface/exchange-rates.model';
+import { BehaviorSubject } from 'rxjs';
+import { FormNames } from '../interface/enum.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +22,7 @@ export class CurrencyExchangeService {
 
   exchangeRates!: MappedCurrencyRateObject[];
 
+  preSelectedData!: preSelectedData;
   fromCurrencies: string[] = [];
   toCurrencies: string[] = [];
   mostPopularCurrencies: string[] = ['EGP','EUR','USD','GBP','SAR','KWD','JPY','RUB','UAH'];
@@ -27,15 +30,25 @@ export class CurrencyExchangeService {
   currentDate!: string;
   currentTime!: string;
   isValid = false;
-  isServiceReferral = false;
-
+  // isServiceReferral = false;
+  loading:BehaviorSubject<boolean> = new BehaviorSubject(false);
+  
   static toTwoDigits(givenNumber: number) {
     return givenNumber > 9 ? `${givenNumber}` : `0${givenNumber}`;
   }
 
-  constructor() {}
+  constructor() {
+    this.setFormDefaultValues();
 
-  ngOnInit() {}
+  }
+
+  setFormDefaultValues(){
+    this.converterForm.controls[FormNames.AmountControl].setValue(1);
+    this.converterForm.controls[FormNames.FromControl].setValue('EUR');
+    this.converterForm.controls[FormNames.ToControl].setValue('USD');
+    
+    this.isValid = this.converterForm.valid;
+  }
 
   getCurrentDate(separator: string): string {
     const now = new Date();
@@ -65,7 +78,7 @@ export class CurrencyExchangeService {
     return this.currentTime;
   }
 
-  toggleServiceReferral() {
-    return (this.isServiceReferral = !this.isServiceReferral);
-  }
+  // toggleServiceReferral() {
+  //   return (this.isServiceReferral = !this.isServiceReferral);
+  // }
 }
