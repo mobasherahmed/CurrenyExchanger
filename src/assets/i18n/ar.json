@@ -1,0 +1,17 @@
+{
+    "main": {
+        "title": "I want to convert",
+        "nav": {
+            "currency": "Currency",
+            "exchange": "Exchange",
+            "currency-exchange": "CURRENCY EXCHANGE",
+            "view-exchange-history": "VIEW EXCHANGE HISTORY"
+        },
+        "exchange-field": {
+            "amount": "Amount",
+            "from": "From",
+            "to": "To",
+            "convert": "CONVERT"
+        }
+    }
+}
