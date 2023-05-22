@@ -14,7 +14,6 @@
 
 <app-converter [details]="true"></app-converter>
 
-{{currencyExchangeService.convertDone}}
 <ng-container *ngIf="currencyExchangeService.convertDone">
     <app-chart [labels]="labels" [values]="values"></app-chart>
 </ng-container>
