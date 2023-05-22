@@ -37,13 +37,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # 2- Converter component :
 
    # converter sticky panel : 
-   ( 
+   
     * An amount input (numbers only).
     * Dropdowns showing all the available currencies in a FROM and TO lists
     * Button to swap the currencies in FROM and TO, Button to convert.
     * Button to redirect to details page for the selected FROM and TO.
     * Converted result displayed
-  )
+  
   - 3x3 cards grid with converted value of the entered amount to the 9 most popular currencies .
 
 ![image](https://github.com/mobasherahmed/CurrenyExchanger/assets/48737204/f95e45a8-8b35-4fae-8152-33a385c040fe)
