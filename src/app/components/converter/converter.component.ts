@@ -153,6 +153,8 @@ export class ConverterComponent implements OnInit {
 
         this.incrementNumberForID();
 
+        this.currencyExchangeService.convertDone  = true;
+
     }
 
     calculateExchangeRate(): string {
@@ -192,11 +194,14 @@ export class ConverterComponent implements OnInit {
     }
 
     mapItemCurrencies(): string[] {
-        return this.currencyExchangeService.exchangeRates
-            .map((currencyItem: MappedCurrencyRateObject) => {
-                return currencyItem.currency;
-            })
-            .sort();
+        // if(this.currencyExchangeService.exchangeRates.length > 0){
+            return this.currencyExchangeService.exchangeRates
+                .map((currencyItem: MappedCurrencyRateObject) => {
+                    return currencyItem.currency;
+                })
+                .sort();
+        // }
+        // return [];
     }
 
     mapResponseData(responseData: ExchangeRatesResponse): MappedCurrencyRateObject[] {

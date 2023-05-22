@@ -24,6 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ConvertResultCardComponent } from './components/convert-result-card/convert-result-card.component';
 import { CurrencyDeatilsComponent } from './components/currency-deatils/currency-deatils.component';
 import { LoaderComponent } from './core/loader.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -36,7 +37,8 @@ export function createTranslateLoader(http: HttpClient) {
     ConverterComponent,
     ConvertResultCardComponent,
     CurrencyDeatilsComponent,
-    LoaderComponent
+    LoaderComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
   }),
   ],
   providers: [ExchangeRatesApiRequestService, CurrencyExchangeService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[LoaderComponent]
 })
 export class AppModule { }

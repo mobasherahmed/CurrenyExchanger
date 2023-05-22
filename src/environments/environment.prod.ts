@@ -4,7 +4,7 @@ export const environment = {
   API_LAYER:{
     SymbolsAPIUrl: 'https://api.apilayer.com/fixer/symbols',
     TimeSeriesAPIUrl :'https://api.apilayer.com/fixer/timeseries',
-    APIKEY: 'PLYjQnVSKEanX83KpmSdZZkmw4EJ1dCz'
+    APIKEY: 'Y5FKPfPpULoUGmtC36W5BLXKy7ZUBjkj'
 
   }
 };

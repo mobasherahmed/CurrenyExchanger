@@ -13,11 +13,16 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class CurrencyDeatilsComponent implements OnInit {
   currenciesNames: CurrenciesResponse[] = [];
-  constructor(public currencyExchangeService: CurrencyExchangeService) {}
+  labels: string[] =[];
+  values: number[] = [];
+  constructor(public currencyExchangeService: CurrencyExchangeService) {
+    this.currencyExchangeService.convertDone  = false;
+
+  }
 
   ngOnInit(): void {
-    // this.getCuurenciesFullName();
-    // this.getTimeSeies();
+    this.getCuurenciesFullName();
+    this.getTimeSeies();
   }
 
   getCuurenciesFullName(): void {
@@ -64,6 +69,8 @@ export class CurrencyDeatilsComponent implements OnInit {
   }
 
   getTimeSeies(){
+    this.currencyExchangeService.loading.next(true);
+
     let myHeaders = new Headers();
     myHeaders.append("apikey", environment.API_LAYER.APIKEY);
 
@@ -75,10 +82,28 @@ export class CurrencyDeatilsComponent implements OnInit {
     
     const pastYear = new Date().getFullYear() - 1;
 
+    const base = this.currencyExchangeService.preSelectedData.fromCurrency;
+    const symbols = this.currencyExchangeService.preSelectedData.toCurrency;
+
+    const startDate = `${pastYear}-01-01`;
+    const endDate = `${pastYear}-12-31`;
+    
     // @ts-ignore
-    fetch(`${environment.API_LAYER.TimeSeriesAPIUrl}?start_date=2023-01-01&end_date=2023-12-31&base=EUR&symbols=USD`, requestOptions)
+    fetch(`${environment.API_LAYER.TimeSeriesAPIUrl}?start_date=${startDate}&end_date=${endDate}&base=${base}&symbols=${symbols}`, requestOptions)
     .then(response => response.text())
-    .then(result => console.log(result))
+    .then(result => this.mapTimeSeiesResponseData(JSON.parse(result)))
     .catch(error => console.log('error', error));
   }
+
+  mapTimeSeiesResponseData(responseData:any){
+    this.labels = Object.keys(responseData.rates);
+    this.values = Object.values(responseData.rates).map(
+      (item:any)=>{
+        return item.USD
+      }
+    );
+    this.currencyExchangeService.loading.next(false);
+
+  }
+
 }

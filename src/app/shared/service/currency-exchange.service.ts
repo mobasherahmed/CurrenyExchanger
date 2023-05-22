@@ -20,9 +20,13 @@ export class CurrencyExchangeService {
     ]),
   });
 
-  exchangeRates!: MappedCurrencyRateObject[];
+  exchangeRates!: MappedCurrencyRateObject[] ;
 
-  preSelectedData!: preSelectedData;
+  preSelectedData: preSelectedData = {
+    fromCurrency: "",
+    toCurrency:"",
+    amount: 1 
+};
   fromCurrencies: string[] = [];
   toCurrencies: string[] = [];
   mostPopularCurrencies: string[] = ['EGP','EUR','USD','GBP','SAR','KWD','JPY','RUB','UAH'];
@@ -30,6 +34,7 @@ export class CurrencyExchangeService {
   currentDate!: string;
   currentTime!: string;
   isValid = false;
+  convertDone : boolean = false;
   // isServiceReferral = false;
   loading:BehaviorSubject<boolean> = new BehaviorSubject(false);
   
