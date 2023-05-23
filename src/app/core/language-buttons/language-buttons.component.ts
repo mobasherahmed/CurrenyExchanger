@@ -24,7 +24,7 @@ export class LanguageButtonsComponent implements OnInit {
     {
         abbreviation: 'ar',
         name: 'Arabic',
-        gap: 'ml-1',
+        gap: 'mx-1',
     },
 ];
 

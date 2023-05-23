@@ -20,6 +20,15 @@ export class LanguageService {
           'prefered-language',
           StorageService.getItem('prefered-language') || this.languagePreference,
       );
+
+      translate.onLangChange.subscribe(lang=>{
+        if(lang.lang === 'ar'){
+          document.getElementsByTagName('body')[0].setAttribute('dir','rtl');
+        }else{
+          document.getElementsByTagName('body')[0].setAttribute('dir','ltr');
+        }
+
+      });
   }
 
   changeLanguage(language: string) {

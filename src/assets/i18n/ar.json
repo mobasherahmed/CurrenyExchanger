@@ -1,17 +1,24 @@
 {
     "main": {
-        "title": "I want to convert",
+        "title": "أريــد تحويل",
         "nav": {
             "currency": "Currency",
             "exchange": "Exchange",
-            "currency-exchange": "CURRENCY EXCHANGE",
-            "view-exchange-history": "VIEW EXCHANGE HISTORY"
+            "currency-exchange": "تغيــر العمـله",
+            "view-exchange-history": "عرض تـاريخ التغيـرات"
         },
         "exchange-field": {
-            "amount": "Amount",
-            "from": "From",
-            "to": "To",
-            "convert": "CONVERT"
+            "amount": "الكميـه",
+            "from": "مــــن",
+            "to": "إلــى",
+            "convert": "تحويـل",
+            "details": "عرض التفاصيــل"
+        },
+        "details":{
+            "back":"العوده للصفحه الرئيسيه"
+        },
+        "chart":{
+            "title":"الرسم البياني مقارنة العام الماضي بين "
         }
     }
 }

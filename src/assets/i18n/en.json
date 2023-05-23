@@ -16,6 +16,9 @@
         },
         "details":{
             "back":"Back to Home"
+        },
+        "chart":{
+            "title":"Chart for the past year comparison between "
         }
     }
 }
