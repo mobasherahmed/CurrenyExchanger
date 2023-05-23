@@ -83,7 +83,7 @@
         type="submit"
         [attr.aria-expanded]="'main.exchange-field.convert' | translate"
         [disabled]="!currencyExchangeService.isValid"
-    >{{ 'main.exchange-field.convert' | translate }}
+    >{{ (details ? 'main.exchange-field.showChart' : 'main.exchange-field.convert') | translate }}
     </button>
 </form>
 
@@ -97,7 +97,7 @@
         color="primary"
         type="button"
         [attr.aria-expanded]="'main.exchange-field.details' | translate"
-        routerLink="/details"
+        routerLink="/details/{{this.fromCurrency}}/{{this.toCurrency}}/{{this.amount}}"
         >{{ 'main.exchange-field.details' | translate }}
         </button>
         <section class="my-2" >

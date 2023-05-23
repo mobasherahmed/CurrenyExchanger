@@ -43,14 +43,13 @@ export class CurrencyExchangeService {
   }
 
   constructor() {
-    this.setFormDefaultValues();
-
+    this.setFormDefaultValues('EUR','USD',1);
   }
 
-  setFormDefaultValues(){
-    this.converterForm.controls[FormNames.AmountControl].setValue(1);
-    this.converterForm.controls[FormNames.FromControl].setValue('EUR');
-    this.converterForm.controls[FormNames.ToControl].setValue('USD');
+  setFormDefaultValues(from:string,to:string,amount:number){
+    this.converterForm.controls[FormNames.AmountControl].setValue(amount);
+    this.converterForm.controls[FormNames.FromControl].setValue(from);
+    this.converterForm.controls[FormNames.ToControl].setValue(to);
     
     this.isValid = this.converterForm.valid;
   }

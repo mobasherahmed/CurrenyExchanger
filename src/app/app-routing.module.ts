@@ -10,7 +10,7 @@ export const routes: Routes = [
       pathMatch: 'full',
   },
   { path: 'converter', component: ConverterComponent},
-  { path: 'details', component: CurrencyDeatilsComponent},
+  { path: 'details/:from/:to/:amount', component: CurrencyDeatilsComponent},
   { path: '**', redirectTo: 'converter' },
 ];
 

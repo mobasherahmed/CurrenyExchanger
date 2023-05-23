@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   CurrenciesResponse,
   CurrenciesSymbolsResponse,
@@ -15,9 +16,9 @@ export class CurrencyDeatilsComponent implements OnInit {
   currenciesNames: CurrenciesResponse[] = [];
   labels: string[] =[];
   values: number[] = [];
-  constructor(public currencyExchangeService: CurrencyExchangeService) {
+  constructor(public currencyExchangeService: CurrencyExchangeService,private route:ActivatedRoute) {
     this.currencyExchangeService.convertDone  = false;
-
+    route.paramMap.subscribe((params:any)=> currencyExchangeService.setFormDefaultValues(params.get('from'),params.get('to'),Number(params.get('amount'))))
   }
 
   ngOnInit(): void {
