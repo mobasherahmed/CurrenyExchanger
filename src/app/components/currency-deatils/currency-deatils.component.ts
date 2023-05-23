@@ -18,7 +18,12 @@ export class CurrencyDeatilsComponent implements OnInit {
   values: number[] = [];
   constructor(public currencyExchangeService: CurrencyExchangeService,private route:ActivatedRoute) {
     this.currencyExchangeService.convertDone  = false;
-    route.paramMap.subscribe((params:any)=> currencyExchangeService.setFormDefaultValues(params.get('from'),params.get('to'),Number(params.get('amount'))))
+    route.paramMap.subscribe((params:any)=> {
+      currencyExchangeService.setFormDefaultValues(params.get('from'),params.get('to'),Number(params.get('amount')));
+      currencyExchangeService.preSelectedData.amount = Number(params.get('amount'));
+      currencyExchangeService.preSelectedData.fromCurrency = params.get('from');
+      currencyExchangeService.preSelectedData.toCurrency = params.get('to');
+    })
   }
 
   ngOnInit(): void {
@@ -100,7 +105,7 @@ export class CurrencyDeatilsComponent implements OnInit {
     this.labels = Object.keys(responseData.rates);
     this.values = Object.values(responseData.rates).map(
       (item:any)=>{
-        return item.USD
+        return item[this.currencyExchangeService.preSelectedData.toCurrency]
       }
     );
     this.currencyExchangeService.loading.next(false);
